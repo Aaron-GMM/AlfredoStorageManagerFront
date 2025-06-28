@@ -1,38 +1,267 @@
+/* style.css */
+
+/* Variáveis de Cores (para facilitar a manutenção) */
+:root {
+    --color-background-light: #f5f7f9; /* Fundo claro e limpo */
+    --color-surface-light: #ffffff;    /* Superfície dos cards */
+    --color-text-dark: #333333;        /* Texto principal escuro */
+    --color-text-medium: #666666;      /* Texto secundário */
+    --color-accent-blue: #007aff;      /* Azul clássico para acentos (botões, links) */
+    --color-accent-blue-dark: #005bb5; /* Azul mais escuro no hover */
+    --color-border: #e0e0e0;           /* Borda sutil */
+    --color-focus-outline: rgba(0, 122, 255, 0.3); /* Destaque no foco */
+    --color-success: #28a745;          /* Verde para mensagens de sucesso */
+    --color-error: #dc3545;            /* Vermelho para mensagens de erro */
+    --border-radius-default: 8px;
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08); /* Sombra suave para profundidade */
+    --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Reset Básico e Estilos Globais */
+body {
+    font-family: 'Roboto', sans-serif; /* Fonte limpa e legível */
+    background-color: var(--color-background-light);
+    color: var(--color-text-dark);
+    margin: 0;
+    padding: 20px; /* Padding geral para o corpo */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo */
+    min-height: 100vh;
+    box-sizing: border-box; /* Garante que padding não adicione largura extra */
+}
+
+/* Cabeçalho */
+.header {
+    width: 100%;
+    max-width: 800px; /* Limita a largura do cabeçalho */
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+    background-color: var(--color-surface-light);
+    border-radius: var(--border-radius-default);
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--color-border);
+}
+
+.header h1 {
+    font-size: 2.2em;
+    color: var(--color-text-dark);
+    margin-bottom: 10px;
+    font-weight: 700; /* Negrito para destaque */
+}
+
+.header p {
+    font-size: 1.0em;
+    color: var(--color-text-medium);
+    margin-top: 0;
+}
+
+/* Container Principal do Conteúdo */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Espaço entre as seções */
+    width: 100%;
+    max-width: 800px; /* Limita a largura do container */
+    padding: 0 10px; /* Pequeno padding nas laterais */
+    box-sizing: border-box;
+}
+
+/* Seções (Cards) */
+.section {
+    background-color: var(--color-surface-light);
+    padding: 25px;
+    border-radius: var(--border-radius-default);
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--color-border);
+    transition: box-shadow 0.2s ease-in-out; /* Transição suave para sombra no hover */
+}
+
+.section:hover {
+    box-shadow: var(--shadow-medium); /* Sombra um pouco mais forte no hover */
+}
+
+.section h2 {
+    font-size: 1.6em;
+    color: var(--color-text-dark);
+    margin-bottom: 15px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--color-border); /* Linha sutil abaixo do título */
+    padding-bottom: 10px;
+}
+
+/* Parágrafos e Código inline */
+.section p {
+    font-size: 0.95em;
+    color: var(--color-text-medium);
+    margin-bottom: 10px;
+}
+
+code {
+    background-color: #f0f0f0; /* Fundo claro para código inline */
+    color: var(--color-text-dark);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+}
+
+/* Input e Botões */
+input[type="text"] {
+    width: calc(100% - 24px); /* Considera o padding */
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-default);
+    background-color: var(--color-surface-light);
+    color: var(--color-text-dark);
+    font-size: 1em;
+    outline: none; /* Remove o outline padrão */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 3px var(--color-focus-outline); /* Brilho azul suave no foco */
+}
+
+button {
+    background-color: var(--color-accent-blue);
+    color: var(--color-white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius-default);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500; /* Peso médio para o texto do botão */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: var(--shadow-light);
+}
+
+button:hover {
+    background-color: var(--color-accent-blue-dark);
+    transform: translateY(-1px); /* Efeito de elevação sutil no hover */
+    box-shadow: var(--shadow-medium);
+}
+
+button:active {
+    transform: translateY(0); /* Retorna à posição original no clique */
+    background-color: var(--color-accent-blue); /* Volta à cor normal */
+}
+
+#goUpButton {
+    background-color: var(--color-text-medium); /* Cor neutra para o botão "Voltar" */
+    margin-bottom: 15px;
+}
+
+#goUpButton:hover {
+    background-color: #555555; /* Um pouco mais escuro no hover */
+}
+
+
+/* Listagem de Arquivos */
+pre {
+    background-color: var(--color-background-light); /* Fundo sutilmente mais escuro que o card */
+    padding: 15px;
+    border-radius: var(--border-radius-default);
+    overflow-x: auto; /* Permite scroll horizontal se o conteúdo for muito longo */
+    font-family: 'Consolas', 'Monaco', monospace; /* Fonte monoespaçada para clareza */
+    font-size: 0.9em;
+    border: 1px solid var(--color-border);
+    line-height: 1.4;
+}
+
+.file-item {
+    cursor: pointer;
+    color: var(--color-text-dark); /* Cor padrão para itens */
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre ícone e texto */
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.file-item:hover {
+    color: var(--color-accent-blue); /* Cor de destaque no hover */
+    transform: translateX(5px); /* Deslize sutil para a direita no hover */
+}
+
+/* Ícones para Diretórios e Arquivos */
+/* Usando pseudo-elementos para simular ícones simples */
+.file-item::before {
+    content: '📁'; /* Ícone de pasta */
+    font-size: 1.1em;
+    color: var(--color-accent-blue); /* Cor do ícone de pasta */
+}
+
+.file-item:not(.is-dir)::before {
+    content: '📄'; /* Ícone de arquivo */
+    color: var(--color-text-medium); /* Cor do ícone de arquivo */
+}
+
+/* Mensagens de Status */
+#createFolderMessage {
+    margin-top: 15px;
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+#createFolderMessage[style*="color: green"] {
+    color: var(--color-success); 
+}
+
+#createFolderMessage[style*="color: red"] {
+    color: var(--color-error);
+}
+
+/* Responsividade Básica */
+@media (max-width: 768px) {
     body {
-        font-family: sans-serif;
-        margin: 20px;
+        padding: 15px;
     }
+
     .header {
-        text-align: center;
+        padding: 25px 15px;
         margin-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-
-    }
-    pre {
-        background-color: #eee;
-        padding: 10px;
-        border-radius: 5px;
     }
 
-    .file-item {
-        cursor: pointer;
-        color: blue;
-        text-decoration: underline;
+    .header h1 {
+        font-size: 1.8em;
     }
 
-    .file-item:hover {
-        color: darkblue;
+    .container {
+        gap: 20px;
+        padding: 0;
     }
 
     .section {
-        margin-top: 30px;
-        border-top: 1px solid #ccc;
-        padding-top: 20px;
-        width: 50%;
+        padding: 20px;
     }
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+
+    .section h2 {
+        font-size: 1.4em;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
     }
+
+    input[type="text"], button {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    #goUpButton {
+        width: 100%; /* Botão voltar também 100% */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 0.9em;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+    }
+}
