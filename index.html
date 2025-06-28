@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel AlfredoLite</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Bem-vindo ao Painel do AlfredoLite!</h1>
+        <p>Monitorando Arquivos do Meu Servidor.</p>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Criar Nova Pasta:</h2>
+            <p>Para criar uma pasta dentro da outra siga o caminho <br>
+            Windows   <code>  : pasta1\pasta2</code>  <br>Linux<code> : pasta1/pasta2</code> </p>
+            <input type="text" id="newFolderName" placeholder="Nome da nova pasta">
+            <button id="createFolderButton">Criar Pasta</button>
+            <p id="createFolderMessage"></p>
+        </div>
+
+        <div class="section">
+            <h2>Arquivos na Pasta Compartilhada:</h2>
+            <p>Caminho Atual: <span id="currentPathDisplay">S:\</span></p>
+            <button id="goUpButton" style="display: none;">Voltar</button>
+            <pre id="fileList">Carregando arquivos...</pre>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
