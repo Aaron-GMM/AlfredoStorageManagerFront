@@ -1,10 +1,9 @@
 // script.js
 
 let currentPath = null;
+let appRootPath = null; 
 
 const API_BASE_URL = `http://${window.location.hostname}:8080/`;
-
-
 
 async function fetchFiles(pathParam = null) {
     try {
@@ -23,10 +22,11 @@ async function fetchFiles(pathParam = null) {
             fileListElement.innerHTML = '';
 
             currentPath = data.current_path;
+            appRootPath = data.app_root_path; 
             document.getElementById('currentPathDisplay').textContent = currentPath;
 
-            const isRoot = (currentPath.endsWith(':\\') && currentPath.length === 3) || (currentPath === '/');
-            document.getElementById('goUpButton').style.display = isRoot ? 'none' : 'block';
+            const isAppRoot = (currentPath === appRootPath);
+            document.getElementById('goUpButton').style.display = isAppRoot ? 'none' : 'block';
 
             data.files.forEach(item => {
                 const div = document.createElement('div');
@@ -40,11 +40,16 @@ async function fetchFiles(pathParam = null) {
                 fileListElement.appendChild(div);
             });
         } else {
-            const errorText = data.error || response.statusText || 'Erro desconhecido';
-            document.getElementById('fileList').textContent = `Erro ao carregar: ${errorText}`;
+  
+            try {
+                const errorText = await response.text(); // Tenta ler a resposta como texto
+                document.getElementById('fileList').textContent = `Erro do servidor: ${response.status} - ${errorText}`;
+            } catch (e) {
+                document.getElementById('fileList').textContent = `Erro ao carregar: ${response.status} ${response.statusText || 'Erro desconhecido'}`;
+            }
         }
     } catch (error) {
-        document.getElementById('fileList').textContent = `Erro ao carregar: ${error.message}`;
+        document.getElementById('fileList').textContent = `Erro de comunicação: ${error.message}`;
     }
 }
 
@@ -61,43 +66,55 @@ function navigateTo(folderName) {
 }
 
 document.getElementById('goUpButton').addEventListener('click', () => {
-    //console.log('Botão "Voltar" clicado. currentPath antes:', currentPath);
+    console.log('Botão "Voltar" clicado. currentPath antes:', currentPath);
+    console.log('Botão "Voltar" clicado. appRootPath:', appRootPath); // Debug para ver o appRootPath
+
     const separator = currentPath.includes('/') ? '/' : '\\';
 
-    const isRoot = (currentPath.endsWith(':\\') && currentPath.length === 3) || (currentPath === '/');
+    // Agora a condição de raiz é baseada no appRootPath
+    const isAppRoot = (currentPath === appRootPath);
 
-    if (!isRoot) {
-        let pathWithoutTrailingSlash = currentPath;
-        if (currentPath.length > 1 && currentPath.endsWith(separator)) {
-            pathWithoutTrailingSlash = currentPath.slice(0, -1);
-        }
+    if (isAppRoot) { 
+       // console.log('Botão "Voltar": Já na raiz da aplicação, não é possível subir mais.');
+        document.getElementById('fileList').textContent = `Você está no diretório raiz da aplicação: ${appRootPath}`; 
+        document.getElementById('goUpButton').style.display = 'none'; 
+        fetchFiles(appRootPath); 
+        return; // Não prossegue com o cálculo do parentPath
+    }
 
-        let pathSegments = pathWithoutTrailingSlash.split(separator);
+    let pathWithoutTrailingSlash = currentPath;
+    if (currentPath.length > 1 && currentPath.endsWith(separator)) {
+        pathWithoutTrailingSlash = currentPath.slice(0, -1);
+    }
 
-        if (pathSegments.length > 0) {
-            pathSegments.pop();
-        }
+    let pathSegments = pathWithoutTrailingSlash.split(separator);
+
+    if (pathSegments.length > 0) {
+        pathSegments.pop(); 
 
         let parentPath = pathSegments.join(separator);
 
+       
         if (separator === '/' && parentPath === '') {
-            parentPath = '/'; // Se voltar de "/pasta" para ""
-        } else if (parentPath.length === 2 && parentPath.endsWith(':')) { // Caso de drives do Windows
-            parentPath += '\\'; // Ex: "C:" se torna "C:\"
-        } else if (separator === '/' && !parentPath.startsWith('/') && parentPath !== '') {
+            parentPath = '/';
+        } else if (parentPath.length === 2 && parentPath.endsWith(':')) {
+            parentPath += '\\';
+        } else if (separator === '/' && currentPath.startsWith('/') && parentPath !== '') {
             parentPath = '/' + parentPath;
         }
 
-      //  console.log('Botão "Voltar": Caminho pai calculado:', parentPath);
+        console.log('Botão "Voltar": Caminho pai calculado:', parentPath);
+
         fetchFiles(parentPath);
     } else {
-      //  console.log('Botão "Voltar": Já na raiz, recarregando a raiz.');
-        fetchFiles(currentPath); // Já na raiz, apenas recarrega
+       
+        console.log('Botão "Voltar": Caminho inconsistente, recarregando a raiz da aplicação.');
+        fetchFiles(appRootPath);
     }
 });
 
 document.getElementById('createFolderButton').addEventListener('click', async () => {
- //   console.log('Botão "Criar Pasta" clicado!');
+    console.log('Botão "Criar Pasta" clicado!');
 
     const folderName = document.getElementById('newFolderName').value;
     const messageElement = document.getElementById('createFolderMessage');
