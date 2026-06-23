@@ -1,267 +1,433 @@
-/* style.css */
-
-/* Variáveis de Cores (para facilitar a manutenção) */
 :root {
-    --color-background-light: #f5f7f9; /* Fundo claro e limpo */
-    --color-surface-light: #ffffff;    /* Superfície dos cards */
-    --color-text-dark: #333333;        /* Texto principal escuro */
-    --color-text-medium: #666666;      /* Texto secundário */
-    --color-accent-blue: #007aff;      /* Azul clássico para acentos (botões, links) */
-    --color-accent-blue-dark: #005bb5; /* Azul mais escuro no hover */
-    --color-border: #e0e0e0;           /* Borda sutil */
-    --color-focus-outline: rgba(0, 122, 255, 0.3); /* Destaque no foco */
-    --color-success: #28a745;          /* Verde para mensagens de sucesso */
-    --color-error: #dc3545;            /* Vermelho para mensagens de erro */
-    --border-radius-default: 8px;
-    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08); /* Sombra suave para profundidade */
-    --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --bg-dark: #0f172a;
+    --bg-panel: rgba(30, 41, 59, 0.7);
+    --bg-panel-hover: rgba(51, 65, 85, 0.8);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --danger-color: #ef4444;
+    --font-family: 'Inter', sans-serif;
 }
 
-/* Reset Básico e Estilos Globais */
-body {
-    font-family: 'Roboto', sans-serif; /* Fonte limpa e legível */
-    background-color: var(--color-background-light);
-    color: var(--color-text-dark);
-    margin: 0;
-    padding: 20px; /* Padding geral para o corpo */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo */
-    min-height: 100vh;
-    box-sizing: border-box; /* Garante que padding não adicione largura extra */
-}
-
-/* Cabeçalho */
-.header {
-    width: 100%;
-    max-width: 800px; /* Limita a largura do cabeçalho */
-    text-align: center;
-    padding: 30px 20px;
-    margin-bottom: 30px;
-    background-color: var(--color-surface-light);
-    border-radius: var(--border-radius-default);
-    box-shadow: var(--shadow-light);
-    border: 1px solid var(--color-border);
-}
-
-.header h1 {
-    font-size: 2.2em;
-    color: var(--color-text-dark);
-    margin-bottom: 10px;
-    font-weight: 700; /* Negrito para destaque */
-}
-
-.header p {
-    font-size: 1.0em;
-    color: var(--color-text-medium);
-    margin-top: 0;
-}
-
-/* Container Principal do Conteúdo */
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 25px; /* Espaço entre as seções */
-    width: 100%;
-    max-width: 800px; /* Limita a largura do container */
-    padding: 0 10px; /* Pequeno padding nas laterais */
+* {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Seções (Cards) */
-.section {
-    background-color: var(--color-surface-light);
-    padding: 25px;
-    border-radius: var(--border-radius-default);
-    box-shadow: var(--shadow-light);
-    border: 1px solid var(--color-border);
-    transition: box-shadow 0.2s ease-in-out; /* Transição suave para sombra no hover */
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow: hidden;
+    /* Soft gradient background */
+    background: radial-gradient(circle at top right, #1e293b, #0f172a);
 }
 
-.section:hover {
-    box-shadow: var(--shadow-medium); /* Sombra um pouco mais forte no hover */
+.app-container {
+    display: flex;
+    height: 100vh;
 }
 
-.section h2 {
-    font-size: 1.6em;
-    color: var(--color-text-dark);
-    margin-bottom: 15px;
-    font-weight: 700;
-    border-bottom: 1px solid var(--color-border); /* Linha sutil abaixo do título */
-    padding-bottom: 10px;
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: var(--bg-panel);
+    backdrop-filter: blur(16px);
+    border-right: 1px solid var(--border-color);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Parágrafos e Código inline */
-.section p {
-    font-size: 0.95em;
-    color: var(--color-text-medium);
-    margin-bottom: 10px;
-}
-
-code {
-    background-color: #f0f0f0; /* Fundo claro para código inline */
-    color: var(--color-text-dark);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.9em;
-}
-
-/* Input e Botões */
-input[type="text"] {
-    width: calc(100% - 24px); /* Considera o padding */
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-default);
-    background-color: var(--color-surface-light);
-    color: var(--color-text-dark);
-    font-size: 1em;
-    outline: none; /* Remove o outline padrão */
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-input[type="text"]:focus {
-    border-color: var(--color-accent-blue);
-    box-shadow: 0 0 0 3px var(--color-focus-outline); /* Brilho azul suave no foco */
-}
-
-button {
-    background-color: var(--color-accent-blue);
-    color: var(--color-white);
-    padding: 12px 25px;
-    border: none;
-    border-radius: var(--border-radius-default);
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 500; /* Peso médio para o texto do botão */
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    box-shadow: var(--shadow-light);
-}
-
-button:hover {
-    background-color: var(--color-accent-blue-dark);
-    transform: translateY(-1px); /* Efeito de elevação sutil no hover */
-    box-shadow: var(--shadow-medium);
-}
-
-button:active {
-    transform: translateY(0); /* Retorna à posição original no clique */
-    background-color: var(--color-accent-blue); /* Volta à cor normal */
-}
-
-#goUpButton {
-    background-color: var(--color-text-medium); /* Cor neutra para o botão "Voltar" */
-    margin-bottom: 15px;
-}
-
-#goUpButton:hover {
-    background-color: #555555; /* Um pouco mais escuro no hover */
-}
-
-
-/* Listagem de Arquivos */
-pre {
-    background-color: var(--color-background-light); /* Fundo sutilmente mais escuro que o card */
-    padding: 15px;
-    border-radius: var(--border-radius-default);
-    overflow-x: auto; /* Permite scroll horizontal se o conteúdo for muito longo */
-    font-family: 'Consolas', 'Monaco', monospace; /* Fonte monoespaçada para clareza */
-    font-size: 0.9em;
-    border: 1px solid var(--color-border);
-    line-height: 1.4;
-}
-
-.file-item {
-    cursor: pointer;
-    color: var(--color-text-dark); /* Cor padrão para itens */
-    padding: 6px 0;
+.logo-area {
     display: flex;
     align-items: center;
-    gap: 10px; /* Espaço entre ícone e texto */
-    transition: color 0.2s ease, transform 0.2s ease;
+    gap: 12px;
+    margin-bottom: 40px;
 }
 
-.file-item:hover {
-    color: var(--color-accent-blue); /* Cor de destaque no hover */
-    transform: translateX(5px); /* Deslize sutil para a direita no hover */
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
 }
 
-/* Ícones para Diretórios e Arquivos */
-/* Usando pseudo-elementos para simular ícones simples */
-.file-item::before {
-    content: '📁'; /* Ícone de pasta */
-    font-size: 1.1em;
-    color: var(--color-accent-blue); /* Cor do ícone de pasta */
+.main-nav {
+    flex: 1;
 }
 
-.file-item:not(.is-dir)::before {
-    content: '📄'; /* Ícone de arquivo */
-    color: var(--color-text-medium); /* Cor do ícone de arquivo */
-}
-
-/* Mensagens de Status */
-#createFolderMessage {
-    margin-top: 15px;
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
     font-weight: 500;
-    font-size: 0.95em;
 }
 
-#createFolderMessage[style*="color: green"] {
-    color: var(--color-success); 
+.nav-item svg {
+    width: 20px;
+    height: 20px;
 }
 
-#createFolderMessage[style*="color: red"] {
-    color: var(--color-error);
+.nav-item:hover, .nav-item.active {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
 }
 
-/* Responsividade Básica */
-@media (max-width: 768px) {
-    body {
-        padding: 15px;
-    }
-
-    .header {
-        padding: 25px 15px;
-        margin-bottom: 20px;
-    }
-
-    .header h1 {
-        font-size: 1.8em;
-    }
-
-    .container {
-        gap: 20px;
-        padding: 0;
-    }
-
-    .section {
-        padding: 20px;
-    }
-
-    .section h2 {
-        font-size: 1.4em;
-        margin-bottom: 10px;
-        padding-bottom: 8px;
-    }
-
-    input[type="text"], button {
-        width: 100%;
-        margin-bottom: 10px;
-        padding: 10px;
-    }
-
-    #goUpButton {
-        width: 100%; /* Botão voltar também 100% */
-    }
+.storage-info {
+    margin-top: auto;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
 }
 
-@media (max-width: 480px) {
-    body {
-        font-size: 0.9em;
-    }
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+}
 
-    .header h1 {
-        font-size: 1.5em;
-    }
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    overflow-y: auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.breadcrumb {
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: var(--text-primary);
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: var(--bg-panel);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-panel-hover);
+}
+
+/* File Grid */
+.file-area {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.file-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.file-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: var(--bg-panel-hover);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.file-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-icon svg {
+    width: 48px;
+    height: 48px;
+    color: var(--accent-color);
+}
+
+.folder-icon svg {
+    color: #eab308; /* Yellow/Gold for folders */
+}
+
+.file-name {
+    font-weight: 500;
+    font-size: 14px;
+    word-break: break-all;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.file-size {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.file-actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.file-card:hover .file-actions {
+    opacity: 1;
+}
+
+.action-btn {
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.action-btn:hover {
+    background: var(--accent-color);
+}
+
+.action-btn.delete:hover {
+    background: var(--danger-color);
+}
+
+.action-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Modals */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    z-index: 100;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background: #1e293b;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    width: 400px;
+    max-width: 90%;
+    z-index: 101;
+    display: none;
+    opacity: 0;
+    transition: all 0.2s;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.modal.active {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-overlay.active {
+    display: block;
+}
+
+.modal h3 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.modal input {
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 24px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.modal input:focus {
+    border-color: var(--accent-color);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* Upload Progress Overlay */
+.upload-progress-container {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 16px;
+    width: 300px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    z-index: 50;
+    display: none;
+}
+
+.upload-progress-container.active {
+    display: block;
+}
+
+.upload-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+/* Login */
+.login-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg-dark);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.login-overlay.active {
+    display: flex;
+}
+
+.login-box {
+    background: var(--bg-panel);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.login-box input {
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 14px;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.login-box input:focus {
+    border-color: var(--accent-color);
 }
