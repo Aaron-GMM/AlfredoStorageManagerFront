@@ -1,4 +1,4 @@
-# 🎨 Alfredo Storage Manager (Frontend)
+#  Alfredo Storage Manager (Frontend)
 
 > A interface web veloz e responsiva para gerenciar o armazenamento de seus arquivos. Construída de forma puramente estática para ser entregue nativamente via Nginx.
 
@@ -6,11 +6,11 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-## 🚀 Sobre o Projeto
+##  Sobre o Projeto
 Este é o cliente SPA (Single Page Application) do **Alfredo Storage Manager**. O frontend foi totalmente desacoplado do backend para extrair o máximo de velocidade e poupar recursos em ambientes de nuvem limitados.
 Ele interage nativamente com a API headless consumindo JSON de forma assíncrona.
 
-## 🏗️ Arquitetura e Deploy (Nginx)
+##  Arquitetura e Deploy (Nginx)
 A grande sacada dessa arquitetura é que **nenhum processamento de backend** é gasto para entregar este frontend. Recomenda-se veementemente a configuração do servidor web Nginx apontando o seu *root* diretamente para esta pasta e repassando requisições da rota `/api/` como *Reverse Proxy* para o backend.
 
 ### Configuração de Exemplo
