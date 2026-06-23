@@ -431,3 +431,126 @@ body {
 .login-box input:focus {
     border-color: var(--accent-color);
 }
+
+/* =========================================================
+   Mobile Responsiveness
+   ========================================================= */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    /* Transform Sidebar into a Top Navbar */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        z-index: 10;
+        background: rgba(30, 41, 59, 0.9);
+    }
+
+    .logo-area {
+        margin-bottom: 0;
+    }
+
+    .logo-area h2 {
+        font-size: 18px;
+    }
+
+    .main-nav {
+        display: none; /* Simplify top bar */
+    }
+
+    .storage-info {
+        display: none; /* Save space on mobile */
+    }
+
+    /* Adjust Main Content Area */
+    .main-content {
+        padding: 16px;
+        height: calc(100vh - 70px);
+    }
+
+    /* Stack breadcrumbs and action buttons */
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .breadcrumb {
+        font-size: 15px;
+        flex-wrap: wrap; /* Allow path wrapping if it's too long */
+    }
+
+    .actions {
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .btn {
+        flex: 1; /* Buttons take equal width */
+        justify-content: center;
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    /* File Grid adjustments for smaller screens */
+    .file-area {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
+    }
+
+    .file-card {
+        padding: 16px;
+    }
+
+    .file-icon {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 12px;
+    }
+
+    .file-icon svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .file-name {
+        font-size: 13px;
+    }
+
+    /* Always show actions on mobile, since there's no "hover" state */
+    .file-actions {
+        opacity: 1;
+        background: rgba(15, 23, 42, 0.8);
+        padding: 4px;
+        border-radius: 8px;
+        top: 4px;
+        right: 4px;
+    }
+
+    .action-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* Modal adjustments */
+    .modal {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .login-box {
+        padding: 24px;
+        margin: 16px;
+        width: auto;
+    }
+}
